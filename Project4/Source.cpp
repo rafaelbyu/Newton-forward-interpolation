@@ -27,7 +27,7 @@ double f(double x)//задал функцию
 
 double NewtonOne(double a, double b, double x, double** delta, int n) // ѕерва€ »нтерпол€ционна€ формула Ќьютона
 {
-	double F = 0;
+	double F = delta[0][1];
 	double h = (b - a) / n;											  //шаг интерпол€ции
 	double q = (x - a) / h;
 	double q1 = 1;
@@ -40,15 +40,14 @@ double NewtonOne(double a, double b, double x, double** delta, int n) // ѕерва€ 
 	//}
 	//return F + f(x);
 
-	for (int i = 0; i <= n; i++)
+	for (int i = 1; i <= n; i++)
 	{	
 		
-		F += (delta[0][i + 1] * q1) ; 
+		q1 = q1 * (q - i + 1) / i;	
 
-		if (i == 0) q1 = q;
-		else q1 = q1 * (q - i + 1) / i;		
+		F += delta[0][i + 1] * q1; 
 	}
-	return F ;
+	return F;
 }
 
 void main()
