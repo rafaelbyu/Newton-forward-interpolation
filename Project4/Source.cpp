@@ -13,17 +13,17 @@ double f(double x)//задал функцию
 	return sqrt(sin(x * x));
 }
 
-int factorial(int n) //факториал
-{
-	if (n < 0) // если введЄм отрицательное число
-		return 0; // возвращаем ноль
-
-	if (n == 0) // если ввести 0
-		return 1; // возвращаем факториал от нул€ = 1
-
-	else
-		return n * factorial(n - 1);//вычисление факториала
-}
+//int factorial(int n) //факториал
+//{
+//	if (n < 0) // если введЄм отрицательное число
+//		return 0; // возвращаем ноль
+//
+//	if (n == 0) // если ввести 0
+//		return 1; // возвращаем факториал от нул€ = 1
+//
+//	else
+//		return n * factorial(n - 1);//вычисление факториала
+//}
 
 double NewtonOne(double a, double b, double x, double** delta, int n) // ѕерва€ »нтерпол€ционна€ формула Ќьютона
 {
@@ -41,11 +41,12 @@ double NewtonOne(double a, double b, double x, double** delta, int n) // ѕерва€ 
 	//return F + f(x);
 
 	for (int i = 0; i <= n; i++)
-	{
-		F += (delta[i][i + 1] * q1) / factorial(i); //ф-ла n-ого члена интерпол€ционной формулы 
+	{	
+		
+		F += (delta[0][i + 1] * q1) ; 
 
-		if (i == 0) q1 = q1 * (q - i);
-		else q1 = q1 * (q - i + 1);
+		if (i == 0) q1 = q;
+		else q1 = q1 * (q - i + 1) / i;		
 	}
 	return F ;
 }
@@ -92,7 +93,7 @@ void main()
 		{
 			delta[i][1] = f(delta[i][0]);
 		}
-		for (int m = 1; m <= n + 1; m++)	// 2, 3, 4... и все последующие строки - это таблица конечных разностей
+		for (int m = 1; m <= n+1; m++)	// 2, 3, 4... и все последующие строки - это таблица конечных разностей
 		{
 			for (int i = 0; i <= n - m; i++)
 			{
